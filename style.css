@@ -1,0 +1,256 @@
+/* ── Variables globales ── */
+:root {
+  --verde: #2ecc71;
+  --amarillo: #f1c40f;
+  --rojo: #e74c3c;
+  --fondo: #1a1a2e;
+  --carta-bg: #16213e;
+  --texto: #eee;
+  --radio: 12px;
+}
+
+/* ── Reset y body ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Header ── */
+.game-header {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.game-title {
+  font-size: 1.4rem;  /* reducir un poco */
+  white-space: nowrap; /* evita que se parta */
+}
+
+.game-stats {
+  display: flex;
+  gap: 16px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--carta-bg);
+  padding: 8px 16px;
+  border-radius: var(--radio);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--verde);
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Tablero ── */
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  max-width: 750px;
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.cargando {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #aaa;
+}
+
+/* ── Carta ── */
+.carta {
+  width: 140px;
+  height: 140px;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.carta-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.carta.volteada .carta-inner {
+  transform: rotateY(180deg);
+}
+
+.cara-atras,
+.cara-frente {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radio);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  backface-visibility: hidden;
+}
+
+.cara-atras {
+  background: var(--carta-bg);
+  border: 2px solid var(--verde);
+}
+
+.cara-frente {
+  background: var(--carta-bg);
+  border: 2px solid var(--amarillo);
+  transform: rotateY(180deg);
+}
+
+/* ── Botón reiniciar ── */
+#btn-reiniciar,
+#btn-jugar-de-nuevo {
+  background: var(--verde);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radio);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+}
+
+#btn-reiniciar:hover,
+#btn-jugar-de-nuevo:hover {
+  background: #27ae60;
+  transform: scale(1.05);
+}
+
+/* ── Pantalla de victoria ── */
+.overlay-victoria {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.overlay-victoria.visible {
+  display: flex;
+}
+
+.victoria-card {
+  background: var(--carta-bg);
+  border-radius: var(--radio);
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 2px solid var(--amarillo);
+}
+
+.victoria-card h2 {
+  font-size: 2rem;
+  color: var(--amarillo);
+}
+
+.victoria-card p {
+  color: #aaa;
+  font-size: 1rem;
+}
+
+.intentos-finales {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--verde);
+}
+
+/* ── Overlay nivel superado ── */
+.overlay-nivel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.overlay-nivel.visible {
+  display: flex;
+}
+
+.nivel-card {
+  background: var(--carta-bg);
+  border-radius: var(--radio);
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 2px solid var(--verde);
+}
+
+.nivel-card h2 {
+  font-size: 2rem;
+  color: var(--verde);
+}
+
+.nivel-card p {
+  color: #aaa;
+  font-size: 1rem;
+}
+
+.proximo-nivel {
+  color: var(--amarillo) !important;
+  font-weight: 600;
+}
+
+#btn-siguiente-nivel {
+  background: var(--verde);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radio);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+}
+
+#btn-siguiente-nivel:hover {
+  background: #27ae60;
+  transform: scale(1.05);
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <title>🍉 Juego de Memoria — Frutas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="game-header">
+      <h1>🍉 Juego de Memoria</h1>
+      <div class="game-stats">
+        <div class="stat-box">
+          <span class="stat-label">Nivel</span>
+          <span class="stat-value" id="nivel-actual">1</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Intentos</span>
+          <span class="stat-value" id="intentos">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Parejas</span>
+          <span class="stat-value" id="parejas">0</span>
+        </div>
+      </div>
+      <button id="btn-reiniciar">Reiniciar Juego</button>
+    </header>
+    <main>
+      <div class="tablero" id="tablero">
+        <p id="msg-cargando">Cargando frutas...🍓</p>
+      </div>
+    </main>
+    <div class="overlay-victoria" id="overlay-victoria">
+      <div class="victoria-card">
+        <div>🎉</div>
+        <h2>¡Ganaste!</h2>
+        <p>Encontraste todas las parejas en</p>
+        <p><span id="intentos-finales">0</span> intentos</p>
+        <button id="btn-jugar-de-nuevo">Jugar de nuevo 🍍</button>
+      </div>
+    </div>
+    <div class="overlay-nivel" id="overlay-nivel">
+      <div class="nivel-card">
+        <div>🎉</div>
+        <h2>¡Nivel <span id="nivel-superado-numero">1</span> superado!</h2>
+        <p>Lo lograste en</p>
+        <p class="intentos-finales">
+          <span id="intentos-nivel-superado">0</span> intentos
+        </p>
+        <p class="proximo-nivel">Siguiente nivel más cartas 👀</p>
+        <button id="btn-siguiente-nivel">Siguiente nivel 🚀</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
