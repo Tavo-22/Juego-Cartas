@@ -3,14 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <title>🍉 Juego de Memoria — Frutas</title>
+    <!-- <title>Document</title> -->
+     <link rel="icon" type="image/png" href="imagenes/logos/logo.png" />
+    <title>Juego de Memoria — Frutas</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
+    <div class="rotate-screen">
+      <div class="icono">📱</div>
+      <p>Gira tu dispositivo para<br />una mejor experiencia</p>
+    </div>
     <header class="game-header">
-      <h1>🍉 Juego de Memoria</h1>
+      <h1><img src="imagenes/logos/logo.png" alt="logo" class="logo" /> Juego de Memoria</h1>
       <div class="game-stats">
         <div class="stat-box">
           <span class="stat-label">Nivel</span>
@@ -26,10 +31,11 @@
         </div>
       </div>
       <button id="btn-reiniciar">Reiniciar Juego</button>
+      <!--<button id="btn-saltar-nivel">⏭ Saltar</button>-->
     </header>
     <main>
       <div class="tablero" id="tablero">
-        <p id="msg-cargando">Cargando frutas...🍓</p>
+        <p id="msg-cargando">Cargando...</p>
       </div>
     </main>
     <div class="overlay-victoria" id="overlay-victoria">
@@ -38,7 +44,7 @@
         <h2>¡Ganaste!</h2>
         <p>Encontraste todas las parejas en</p>
         <p><span id="intentos-finales">0</span> intentos</p>
-        <button id="btn-jugar-de-nuevo">Jugar de nuevo 🍍</button>
+        <button id="btn-jugar-de-nuevo">Jugar de nuevo</button>
       </div>
     </div>
     <div class="overlay-nivel" id="overlay-nivel">
@@ -54,6 +60,7 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="config.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

@@ -24,12 +24,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
 }
 
 /* ── Header ── */
 .game-header {
-  width: 100%;
-  max-width: 700px;
+  width: 95vw;
+  max-width: 1200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -37,9 +38,17 @@ body {
   margin-bottom: 30px;
 }
 
+/* ── Logo ── */
+.logo {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
 .game-title {
-  font-size: 1.4rem;  /* reducir un poco */
-  white-space: nowrap; /* evita que se parta */
+  font-size: 1.4rem;
+  white-space: nowrap;
 }
 
 .game-stats {
@@ -67,8 +76,10 @@ body {
   color: var(--verde);
 }
 
+/* ── Main ── */
 main {
-  width: 100%;
+  width: 95vw;
+  max-width: 1200px;
   display: flex;
   justify-content: center;
 }
@@ -76,12 +87,9 @@ main {
 /* ── Tablero ── */
 .tablero {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  max-width: 750px;
+  gap: 12px;
   width: 100%;
-  padding: 20px;
-  margin: 0 auto;
+  padding: 10px;
 }
 
 .cargando {
@@ -93,10 +101,11 @@ main {
 
 /* ── Carta ── */
 .carta {
-  width: 140px;
-  height: 140px;
+  width: 100%;
+  aspect-ratio: 1;
   cursor: pointer;
   perspective: 1000px;
+  min-width: 0;
 }
 
 .carta-inner {
@@ -135,9 +144,17 @@ main {
   transform: rotateY(180deg);
 }
 
-/* ── Botón reiniciar ── */
+.cara-frente img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+/* ── Botones ── */
 #btn-reiniciar,
-#btn-jugar-de-nuevo {
+#btn-jugar-de-nuevo,
+#btn-siguiente-nivel,
+#btn-saltar-nivel {
   background: var(--verde);
   color: #fff;
   border: none;
@@ -150,9 +167,20 @@ main {
 }
 
 #btn-reiniciar:hover,
-#btn-jugar-de-nuevo:hover {
+#btn-jugar-de-nuevo:hover,
+#btn-siguiente-nivel:hover,
+#btn-saltar-nivel:hover {
   background: #27ae60;
   transform: scale(1.05);
+}
+
+#btn-saltar-nivel {
+  background: var(--rojo);
+  margin-left: 8px;
+}
+
+#btn-saltar-nivel:hover {
+  background: #c0392b;
 }
 
 /* ── Pantalla de victoria ── */
@@ -238,19 +266,51 @@ main {
   font-weight: 600;
 }
 
-#btn-siguiente-nivel {
-  background: var(--verde);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: var(--radio);
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.1s, background 0.2s;
+/* ── Pantalla de rotación ── */
+.rotate-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--fondo);
+  z-index: 999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  padding: 20px;
 }
 
-#btn-siguiente-nivel:hover {
-  background: #27ae60;
-  transform: scale(1.05);
+.rotate-screen .icono {
+  font-size: 4rem;
+  animation: rotar 1.5s infinite ease-in-out;
 }
+
+.rotate-screen p {
+  font-size: 1.2rem;
+  color: var(--texto);
+}
+
+@keyframes rotar {
+  0%   { transform: rotate(0deg);   }
+  50%  { transform: rotate(90deg);  }
+  100% { transform: rotate(0deg);   }
+}
+
+/* ── Solo en móvil vertical ── */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .rotate-screen {
+    display: flex;
+  }
+}
+
+/* ── Tamaño máximo de cartas en niveles bajos ── */
+/*.tablero.cols-4 .carta {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.tablero.cols-4 {
+  justify-content: center;
+  justify-items: center;
+}*/
